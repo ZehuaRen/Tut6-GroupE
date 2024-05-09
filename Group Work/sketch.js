@@ -16,7 +16,7 @@ function setup() {
   noLoop();
   createComposition();
 
-
+ 
 }
 
 function draw() {
@@ -32,12 +32,40 @@ function createComposition() {
   for (let i = 0; i < 2000; i++) {
     let newRecta = generateRectangle();
     let canAdd = true;
-       if (canAdd) {
+    for (let recta of rectangles) {
+      if (rectanglesIntersect(newRecta, recta)) {
+        canAdd = false;
+        break;
+      }
+    }
+    if (canAdd) {
       rectangles.push(newRecta);
     }
   }
 
-    let colors = [...allColors, ...allColors];
+  for (let i = margin; i < N - margin; i++) {
+    for (let j = margin; j < N - margin; j++) {
+      let newRecta = {
+        i: i,
+        j: j,
+        si: 1,
+        sj: 1
+      }
+      let canAdd = true;
+      for (let recta of rectangles) {
+        if (rectanglesIntersect(newRecta, recta)) {
+          canAdd = false;
+          break;
+        }
+      }
+      if (canAdd) {
+        rectangles.push(newRecta);
+      }
+    }
+  }
+
+  shuffle(rectangles, true);
+  let colors = [...allColors, ...allColors];
   let i = 0;
   while (colors.length > 0) {
     if (rectangles[i].si > 1 && rectangles[i].sj > 1 && (rectangles[i].si + rectangles[i].sj) < 7) rectangles[i].insideCol = colors.pop();
@@ -81,4 +109,22 @@ function drawRectangle(x0, y0, si, sj, insideCol) {
     }
   }
 
- }
+  let prevCol1, prevCol2, newCol;
+  for (let x = x0; x < x0 + si + v / 2; x += v) {
+    do {
+      newCol = random(palette);
+    } while (newCol == prevCol1)
+    if (Math.random() < 2 / 3) newCol = mainCol;
+    fill(newCol);
+    prevCol1 = newCol;
+    rect(x, y0, v, v);
+
+    do {
+      newCol = random(palette);
+    } while (newCol == prevCol2)
+    if (Math.random() < 2 / 3) newCol = mainCol;
+    fill(newCol);
+    prevCol2 = newCol;
+    rect(x, y0 + sj, v, v);
+  }
+}
