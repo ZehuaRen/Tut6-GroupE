@@ -16,7 +16,6 @@ function setup() {
   noLoop();
   createComposition();
 
- 
 }
 
 function draw() {
@@ -127,4 +126,22 @@ function drawRectangle(x0, y0, si, sj, insideCol) {
     prevCol2 = newCol;
     rect(x, y0 + sj, v, v);
   }
+  for (let y = y0 + v; y < y0 + sj - v / 2; y += v) {
+    do {
+      newCol = random(palette);
+    } while (newCol == prevCol1)
+    if (Math.random() < 2 / 3) newCol = mainCol;
+    fill(newCol);
+    prevCol1 = newCol;
+    rect(x0, y, v, v);
+
+    do {
+      newCol = random(palette);
+    } while (newCol == prevCol2)
+    if (Math.random() < 2 / 3) newCol = mainCol;
+    fill(newCol);
+    prevCol2 = newCol;
+    rect(x0 + si, y, v, v);
+  }
 }
+
