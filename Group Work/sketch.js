@@ -237,3 +237,15 @@ for (let y = y0 + v; y < y0 + sj - v / 2; y += v) {
         this.col = color(map(this.dir.heading(), -PI, PI, 0, 100), 90, 100); // Maps colors according to orientation angle
       }
     }
+    // Control the movement of the ball
+  move()
+  {
+    this.pos.add(this.dir); // Move position according to direction
+    const d = dist(this.pos.x, this.pos.y, this.center.x, this.center.y); // Calculate the distance of the ball from the center point
+    const s = min(width, height); // Gets the smaller of the canvas width or height.
+    
+    // Adjust the ball diameter according to the distance
+    if (d > s * 0.4) this.diam = map(d, s * 0.4, s * 0.45, s * 0.04, 0, true);
+    else if (d > s * 0.3) this.diam = map(d, s * 0.3, s * 0.4, s * 0.023, s * 0.042, true);
+    else this.diam = map(d, 0, s * 0.1, 0, s * 0.021, true);
+  }
