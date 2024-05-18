@@ -32,16 +32,7 @@ function draw() {
   noStroke()
   randomSeed(2)
   
-  if(frameCount>300&&frameCount%60==0){
-     palette = []
-    createComposition();
-      for (let i = 0; i < 12; i++) {
-    let randomColor = '#' + Math.floor(Math.random()*16777215).toString(16); // 生成随机的十六进制颜色
-   palette.push(randomColor); // Add the generated color to the array
-  }
-  mainCol = '#' + Math.floor(Math.random()*16777215).toString(16)
-    allColors = [...palette.slice(1), mainCol]
-  }
+  
   // Iterate over all the cubes
   for (let recta of rectangles) {
     // Drawing small squares
@@ -225,44 +216,9 @@ for (let y = y0 + v; y < y0 + sj - v / 2; y += v) {
       prevCol2 = newCol;
       rect(x0 + si, y, v, v);
     }
-    class Ball
-    {
-      // Constructor to initialize the properties of the ball
-      constructor(diam_, _angle)
-      {
-        this.center = createVector(width/2, height/2); // Set the center of the ball to the center of the canvas
-        this.dir = createVector(cos(_angle), sin(_angle)); // Calculate the direction of motion from a given angle
-        this.pos = this.center.copy().add(this.dir.mult(1)); // Calculate position based on center point and direction
-        this.diam = diam_; // Setting the initial diameter
-        this.col = color(map(this.dir.heading(), -PI, PI, 0, 100), 90, 100); // Maps colors according to orientation angle
-      }
-    }
-    // Control the movement of the ball
-  move()
-  {
-    this.pos.add(this.dir); // Move position according to direction
-    const d = dist(this.pos.x, this.pos.y, this.center.x, this.center.y); // Calculate the distance of the ball from the center point
-    const s = min(width, height); // Gets the smaller of the canvas width or height.
-    
-    // Adjust the ball diameter according to the distance
-    if (d > s * 0.4) this.diam = map(d, s * 0.4, s * 0.45, s * 0.04, 0, true);
-    else if (d > s * 0.3) this.diam = map(d, s * 0.3, s * 0.4, s * 0.023, s * 0.042, true);
-    else this.diam = map(d, 0, s * 0.1, 0, s * 0.021, true);
-  }
+ 
 
-    // Show ball on canvas
-    display()
-    {
-      noStroke(); // Do not show border
-      fill(this.col); // fill color
-      ellipse(this.pos.x, this.pos.y, this.diam, this.diam); // Drawing Circles
-    }
+ 
     
-    // Check if the ball moves out of the canvas range
-    isDead()
-    {
-      if (dist(this.pos.x, this.pos.y, this.center.x, this.center.y) > min(width, height)) return true;
-      else return false;
-    }
-  
+    
   
