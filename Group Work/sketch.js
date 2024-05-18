@@ -249,3 +249,20 @@ for (let y = y0 + v; y < y0 + sj - v / 2; y += v) {
     else if (d > s * 0.3) this.diam = map(d, s * 0.3, s * 0.4, s * 0.023, s * 0.042, true);
     else this.diam = map(d, 0, s * 0.1, 0, s * 0.021, true);
   }
+
+    // Show ball on canvas
+    display()
+    {
+      noStroke(); // Do not show border
+      fill(this.col); // fill color
+      ellipse(this.pos.x, this.pos.y, this.diam, this.diam); // Drawing Circles
+    }
+    
+    // Check if the ball moves out of the canvas range
+    isDead()
+    {
+      if (dist(this.pos.x, this.pos.y, this.center.x, this.center.y) > min(width, height)) return true;
+      else return false;
+    }
+  
+  
