@@ -216,6 +216,7 @@ for (let y = y0 + v; y < y0 + sj - v / 2; y += v) {
       prevCol2 = newCol;
       rect(x0 + si, y, v, v);
     }
+
  
 
  
