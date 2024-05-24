@@ -31,8 +31,6 @@ function draw() {
   // No Stroke
   noStroke()
   randomSeed(2)
-  
-  
   // Iterate over all the cubes
   for (let recta of rectangles) {
     // Drawing small squares
@@ -190,32 +188,34 @@ function drawRectangle(x0, y0, si, sj, insideCol) {
     prevCol2 = newCol;
     rect(x0 + si, y, v, v);
   }
+
+
+  // Vertical Loop Drawing Rectangles
+  for (let y = y0 + v; y < y0 + sj - v / 2; y += v) {
+    // Select a new color that is different from the previous one
+    do {
+      newCol = random(palette);
+    } while (newCol == prevCol1)
+    // Use the primary color with a 2/3 probability
+    if (random(1) < 2 / 3) newCol = mainCol;
+    // Fill colors and draw rectangles
+    fill(newCol);
+    prevCol1 = newCol;
+    rect(x0, y, v, v);
+
+    // Select a new color that is different from the previous one
+    do {
+      newCol = random(palette);
+    } while (newCol == prevCol2)
+    // Use the primary color with a 2/3 probability
+    if (random(1) < 2 / 3) newCol = mainCol;
+    // Fill colors and draw rectangles
+    fill(newCol);
+    prevCol2 = newCol;
+    rect(x0 + si, y, v, v);
+  }
 }
 
-// Vertical Loop Drawing Rectangles
-for (let y = y0 + v; y < y0 + sj - v / 2; y += v) {
-  // Select a new color that is different from the previous one
-  do {
-    newCol = random(palette);
-  } while (newCol == prevCol1)
-  // Use the primary color with a 2/3 probability
-  if (random(1) < 2 / 3) newCol = mainCol;
-  // Fill colors and draw rectangles
-  fill(newCol);
-  prevCol1 = newCol;
-  rect(x0, y, v, v);
-
-      // Select a new color that is different from the previous one
-      do {
-        newCol = random(palette);
-      } while (newCol == prevCol2)
-      // Use the primary color with a 2/3 probability
-      if (random(1) < 2 / 3) newCol = mainCol;
-      // Fill colors and draw rectangles
-      fill(newCol);
-      prevCol2 = newCol;
-      rect(x0 + si, y, v, v);
-    }
 
  
 
